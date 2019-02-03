@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 8081",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -20,7 +20,6 @@
     "eslint-plugin-vue": "^5.0.0",
     "graphql-tag": "^2.9.0",
     "vue-cli-plugin-apollo": "^0.19.1",
-    "vue-router": "^3.0.2",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
