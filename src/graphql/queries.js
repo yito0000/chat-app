@@ -1,5 +1,6 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
+import gql from 'graphql-tag'
 
 export const getMessage = `query GetMessage($id: ID!) {
   getMessage(id: $id) {
@@ -9,7 +10,7 @@ export const getMessage = `query GetMessage($id: ID!) {
   }
 }
 `;
-export const listMessages = `query ListMessages(
+export const listMessages = gql`query ListMessages(
   $filter: TableMessageFilterInput
   $limit: Int
   $nextToken: String
