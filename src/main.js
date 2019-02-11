@@ -4,8 +4,6 @@ import VueApollo from 'vue-apollo'
 import AWSAppSyncClient from "aws-appsync"
 import appSyncConfig from './aws-exports.js'
 
-Vue.config.productionTip = false
-
 const config = {
   url: appSyncConfig.aws_appsync_graphqlEndpoint,
   region: appSyncConfig.aws_appsync_region,
