@@ -25,9 +25,9 @@
       <div class="container">
         <div class="row">
           <div class="input-field col s9 offset-s3">
-            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <textarea v-model="inputMessage" id="textarea1" class="materialize-textarea"></textarea>
             <label for="textarea1">メッセージを入力してください</label>
-            <a style="float: right" class="waves-effect waves-light btn">送信</a>
+            <a style="float: right" class="waves-effect waves-light btn" @click="addMessage()">送信</a>
           </div>
         </div>
       </div>
@@ -37,6 +37,7 @@
 
 <script>
 import { listMessages } from '../graphql/queries.js'
+import { createMessage } from '../graphql/mutations.js'
 
 const moment = require('moment')
 
@@ -45,6 +46,7 @@ const __stringParseToMoment = ((stringDate) => {
 })
 
 export default {
+  name: 'chat',
   data() {
     return {
       messages: []
@@ -52,6 +54,7 @@ export default {
   },
 
   mounted() {
+
   },
 
 
@@ -59,7 +62,11 @@ export default {
     dateFormat(createDate) {
       var m = __stringParseToMoment(createDate)
       return m.format('YYYY/MM/DD HH:mm:ss');
-    }
+    },
+    async addMessage() {
+      console.log(this.inputMessage)
+      createMessage(this.inputMessage)
+    },
   },
 
   apollo: {

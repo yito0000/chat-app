@@ -3,6 +3,7 @@ import App from './App.vue'
 import VueApollo from 'vue-apollo'
 import AWSAppSyncClient from "aws-appsync"
 import appSyncConfig from './aws-exports.js'
+import { API } from 'aws-amplify'
 
 const config = {
   url: appSyncConfig.aws_appsync_graphqlEndpoint,
@@ -27,6 +28,8 @@ const appsyncProvider = new VueApollo({
 
 Vue.config.productionTip = false
 Vue.use(VueApollo)
+
+API.configure(appSyncConfig)
 
 new Vue({
   provide: appsyncProvider.provide(),
