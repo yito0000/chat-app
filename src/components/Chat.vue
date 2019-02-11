@@ -11,8 +11,8 @@
           <li v-for="message in messages">
             <div class="row z-depth-2 white" style="margin-bottom: 10px">
               <div class="col s9">
-                <p>create_date : {{ dateFormat(message.create_date) }}</p>
-                <p class="flow-text">text : {{ message.text }}</p>
+                <p style="font-size: x-small">{{ dateFormat(message.create_date) }}</p>
+                <p>{{ message.text }}</p>
               </div>
             </div>
           </li>
@@ -40,6 +40,10 @@ import { listMessages } from '../graphql/queries.js'
 
 const moment = require('moment')
 
+const __stringParseToMoment = ((stringDate) => {
+  return moment(stringDate, "YYYY-MM-DDTHH:mm:ss.SSSZ")
+})
+
 export default {
   data() {
     return {
@@ -50,21 +54,25 @@ export default {
   mounted() {
   },
 
+
+  methods: {
+    dateFormat(createDate) {
+      var m = __stringParseToMoment(createDate)
+      return m.format('YYYY/MM/DD HH:mm:ss');
+    }
+  },
+
   apollo: {
     messages: {
       query: () => listMessages,
       update: data => {
-        return data.listMessages.items
+        return data.listMessages.items.sort((o1, o2) => {
+          return moment(__stringParseToMoment(o1.create_date)).isAfter(__stringParseToMoment(o2.create_date)) ? 1 : -1
+        })
       }
     }
   },
 
-  methods: {
-    dateFormat(createDate) {
-      var m = moment(createDate, "YYYY-MM-DDTHH:mm:ss.SSSZ")
-      return m.format('YYYY/MM/DD HH:mm:ss');
-    }
-  }
 }
 
 </script>
