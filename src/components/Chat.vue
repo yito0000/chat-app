@@ -38,6 +38,7 @@
 <script>
 import { listMessages } from '../graphql/queries.js'
 import { createMessage } from '../graphql/mutations.js'
+import { onCreateMessage } from '../graphql/subscriptions.js'
 
 const moment = require('moment')
 
@@ -54,7 +55,18 @@ export default {
   },
 
   mounted() {
+    const observer = this.$apollo.subscribe({
+      query: onCreateMessage,
+    })
 
+    observer.subscribe({
+      next(data) {
+        console.log(data.data.onCreateMessage)
+      },
+      error(error) {
+        console.error(error)
+      },
+    })
   },
 
 
@@ -64,7 +76,6 @@ export default {
       return m.format('YYYY/MM/DD HH:mm:ss');
     },
     async addMessage() {
-      console.log(this.inputMessage)
       createMessage(this.inputMessage)
     },
   },
