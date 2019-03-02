@@ -5,9 +5,9 @@
     </div>
 
     <div class="divider"></div>
-    <div class="section blue-grey lighten-4" style="height: 500px; overflow: auto;">
-      <div class="container">
-        <ul id="messages-container" >
+    <div id="messages-div" class="section blue-grey lighten-4">
+      <div id="messages-container" class="container" style="height: 500px; overflow: hidden; overflow-y: scroll">
+        <ul>
           <li v-for="message in this.$data.messages">
             <div class="row z-depth-2 white" style="margin-bottom: 10px">
               <div class="col s9">
@@ -59,9 +59,6 @@ export default {
       },
     })
 
-    let container = this.$el.querySelector("#messages-container")
-    container.scrollIntoView(false)
-
   },
 
   methods: {
@@ -74,9 +71,13 @@ export default {
     },
     async registMessage() {
       createMessage(this.inputMessage)
+      let container = document.getElementById('messages-container')
+      container.scrollTop = container.scrollHeight
     },
     updateMessages(newMessages) {
       this.messages = this.listMessagesSorted(newMessages.items)
+      let container = document.getElementById('messages-container')
+      container.scrollTop = container.scrollHeight
     },
     listMessagesSorted(data) {
       return data.sort((o1, o2) => {
