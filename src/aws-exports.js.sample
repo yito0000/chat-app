@@ -5,7 +5,10 @@ const awsmobile = {
     "aws_appsync_graphqlEndpoint": "< API URL >",
     "aws_appsync_region": "< region >",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "< API KEY >"
+    "aws_appsync_apiKey": "< API KEY >",
+    "aws_cognito_region": "< region >",
+    "aws_user_pools_id": "< pools id >",
+    "aws_user_pools_web_client_id": "< pools web client id >"
 };
 
 

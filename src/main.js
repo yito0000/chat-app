@@ -2,15 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueApollo from 'vue-apollo'
 import AWSAppSyncClient from "aws-appsync"
-import appSyncConfig from './aws-exports.js'
+import AwsConfig from './aws-exports.js'
 import { API } from 'aws-amplify'
+import routes from './router.js'
 
 const config = {
-  url: appSyncConfig.aws_appsync_graphqlEndpoint,
-  region: appSyncConfig.aws_appsync_region,
+  url: AwsConfig.aws_appsync_graphqlEndpoint,
+  region: AwsConfig.aws_appsync_region,
   auth: {
-    type: appSyncConfig.aws_appsync_authenticationType,
-    apiKey: appSyncConfig.aws_appsync_apiKey,
+    type: AwsConfig.aws_appsync_authenticationType,
+    apiKey: AwsConfig.aws_appsync_apiKey,
   }
 }
 const options = {
@@ -29,9 +30,10 @@ const appsyncProvider = new VueApollo({
 Vue.config.productionTip = false
 Vue.use(VueApollo)
 
-API.configure(appSyncConfig)
+API.configure(AwsConfig)
 
 new Vue({
   provide: appsyncProvider.provide(),
+  router: routes,
   render: h => h(App)
 }).$mount('#app')

@@ -1,6 +1,6 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
-import { API, graphqlOperation } from 'aws-amplify'
+// import { API, graphqlOperation } from 'aws-amplify'
 import gql from 'graphql-tag'
 
 //export const onCreateMessage = async () => {
