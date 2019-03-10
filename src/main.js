@@ -3,7 +3,7 @@ import App from './App.vue'
 import VueApollo from 'vue-apollo'
 import AWSAppSyncClient from "aws-appsync"
 import AwsConfig from './aws-exports.js'
-import { API } from 'aws-amplify'
+import Amplify from 'aws-amplify'
 import routes from './router.js'
 
 const config = {
@@ -30,7 +30,7 @@ const appsyncProvider = new VueApollo({
 Vue.config.productionTip = false
 Vue.use(VueApollo)
 
-API.configure(AwsConfig)
+Amplify.configure(AwsConfig)
 
 new Vue({
   provide: appsyncProvider.provide(),

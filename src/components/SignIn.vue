@@ -1,16 +1,16 @@
 <template>
-  <div id="auth">
+  <div id="sign-in">
     <div class="section">
       <div class="container">
         <div class="row">
           <div class="input-field col s6">
-            <input id="name" type="text">
-            <label for="name">name</label>
+            <input id="username" type="text" v-model="username">
+            <label for="username">username</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <input type="password" id="password">
+            <input type="password" id="password" v-model="password">
             <label for="password">password</label>
           </div>
         </div>
@@ -23,9 +23,10 @@
 </template>
 <script>
 import router from '../router.js'
+import Auth from '@aws-amplify/auth';
 
 export default {
-  name: 'auth',
+  name: 'sign-in',
   data() {
     return {
       username: "",
@@ -35,7 +36,12 @@ export default {
 
   methods: {
     async login() {
-      router.push('room')
+      Auth.signIn(this.$data.username, this.$data.password)
+        .then((success) => {
+          console.log('successful sign in')
+          router.push('room')
+         }).catch(err => console.log(err))
+
     }
   }
 }
