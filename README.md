@@ -1,8 +1,24 @@
 # chat-app
 
 ## AppSyncの準備
+以下を参考にMessageTableを作成
+```/appsync_conf/schema.graphql```
+
+以下のようにCreateMessageを編集
+```
+/appsync_conf/resolvers/CreateMessage.md
+```
 
 ## Cognitoの準備
+amplifyのインストール
+```
+$ npm install -g @aws-amplify/cli
+$ amplify init
+```
+cognitoを追加
+```
+$ amplify add auth
+```
 
 ## Project setup
 ```

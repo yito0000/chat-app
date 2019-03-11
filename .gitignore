@@ -27,3 +27,9 @@ amplify/.config/aws-info.json
 amplify/.config/project-config.json
 amplify/backend/amplify-meta.json
 src/aws-exports.js
+package-lock.json
+amplify/backend/awscloudformation/nested-cloudformation-stack.yml
+amplify/backend/auth/cognitobbc066e4/parameters.json
+amplify/backend/auth/cognitobbc066e4/cognitobbc066e4-cloudformation-template.yml
+amplify/#current-cloud-backend/auth/cognitobbc066e4/parameters.json
+amplify/#current-cloud-backend/auth/cognitobbc066e4/cognitobbc066e4-cloudformation-template.yml
