@@ -50,10 +50,13 @@ export default {
         username,
         password,
         attributes: {
-          email
+          email: email,
+          name: username
         },
       }).then((success) => {
         console.log('successful sign in')
+        localStorage.username = username
+        router.push('confirm/code')
       }).catch(err => console.log(err))
     }
   }

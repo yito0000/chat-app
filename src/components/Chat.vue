@@ -11,7 +11,7 @@
           <li v-for="message in this.$data.messages">
             <div class="row z-depth-2 white" style="margin-bottom: 10px">
               <div class="col s9">
-                <p style="font-size: x-small">{{ dateFormat(message.create_date) }}</p>
+                <span style="font-size: small">{{ message.user_id }}</span>&nbsp<span style="font-size: x-small">{{ dateFormat(message.create_date) }}</span>
                 <p>{{ message.text }}</p>
               </div>
             </div>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import router from '../router.js'
 import { listMessages } from '../graphql/queries.js'
 import { createMessage } from '../graphql/mutations.js'
 import { onCreateMessage } from '../graphql/subscriptions.js'
@@ -52,6 +53,9 @@ export default {
   },
 
   mounted() {
+    if(!localStorage.username) {
+      router.push('/')
+    }
     this.$apollo.queries.messages.fetchMore({
       updateQuery: (previousResult, { fetchMoreResult }) => {
         this.updateMessages(fetchMoreResult.listMessages)
@@ -70,12 +74,14 @@ export default {
       return m.format('YYYY/MM/DD HH:mm:ss');
     },
     async registMessage() {
-      createMessage(this.inputMessage)
-      let container = document.getElementById('messages-container')
-      container.scrollTop = container.scrollHeight
+      const input = new Object()
+      input.username = localStorage.username
+      input.text = this.$data.inputMessage
+      createMessage(input)
     },
     updateMessages(newMessages) {
       this.messages = this.listMessagesSorted(newMessages.items)
+
       let container = document.getElementById('messages-container')
       container.scrollTop = container.scrollHeight
     },
@@ -83,7 +89,7 @@ export default {
       return data.sort((o1, o2) => {
         return moment(this.stringParseToMoment(o1.create_date)).isAfter(this.stringParseToMoment(o2.create_date)) ? 1 : -1
       })
-    },
+    }
   },
 
   apollo: {

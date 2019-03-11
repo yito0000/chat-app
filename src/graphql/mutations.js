@@ -2,10 +2,11 @@
 // this is an auto generated file. This will be overwritten
 import { API, graphqlOperation } from 'aws-amplify'
 
-export const createMessage = async (inputMessage) => {
+export const createMessage = async (data) => {
   const create = `mutation CreateMessage($input: CreateMessageInput!) {
     createMessage(input: $input) {
       id
+      user_id
       text
       create_date
     }
@@ -13,10 +14,12 @@ export const createMessage = async (inputMessage) => {
   `
   const messageDetails = {
     input: {
-      text: inputMessage
+      user_id: data.username,
+      text: data.text
     }
   }
   const newMessage = await API.graphql(graphqlOperation(create, messageDetails))
+  console.log(newMessage)
   return newMessage
 
 };
