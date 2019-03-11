@@ -1,5 +1,9 @@
 # chat-app
 
+## AppSyncの準備
+
+## Cognitoの準備
+
 ## Project setup
 ```
 npm install
