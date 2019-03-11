@@ -6,7 +6,7 @@
 
 以下のようにCreateMessageを編集
 ```
-/appsync_conf/resolvers/CreateMessage.md
+chat-app/appsync_conf/resolvers/CreateMessage.md
 ```
 
 ## Cognitoの準備
