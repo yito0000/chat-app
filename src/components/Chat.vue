@@ -1,17 +1,25 @@
 <template>
   <div id="chat">
-    <div class="section teal lighten-4">
-      <h1>chat</h1>
+    <div>チャットルーム</div>
+    <div>ユーザー名 : {{ username }}
+      <a style="cursor: pointer" @click="back()">名前変更</a>
     </div>
-
     <div class="divider"></div>
-    <div id="messages-div" class="section blue-grey lighten-4">
-      <div id="messages-container" class="container" style="height: 500px; overflow: hidden; overflow-y: scroll">
+    <div id="messages-div" class="section blue-grey lighten-4" style="height: 500px; overflow: hidden; overflow-y: scroll">
+      <div id="messages-container" class="container">
         <ul>
           <li v-for="message in this.$data.messages">
             <div class="row z-depth-2 white" style="margin-bottom: 10px">
               <div class="col s9">
-                <span style="font-size: small">{{ message.user_id }}</span>&nbsp<span style="font-size: x-small">{{ dateFormat(message.create_date) }}</span>
+                <span style="font-size: small">{{ message.username }}</span>&nbsp<span style="font-size: x-small">{{ dateFormat(message.createDate) }}</span>
+                <p>{{ message.text }}</p>
+              </div>
+            </div>
+          </li>
+          <li v-for="message in this.$data.pullMessages">
+            <div class="row z-depth-2 white" style="margin-bottom: 10px">
+              <div class="col s9">
+                <span style="font-size: small">{{ message.username }}</span>&nbsp<span style="font-size: x-small">{{ dateFormat(message.createDate) }}</span>
                 <p>{{ message.text }}</p>
               </div>
             </div>
@@ -47,7 +55,9 @@ export default {
   name: 'chat',
   data() {
     return {
+      username: localStorage.username,
       messages: [],
+      pullMessages: [],
       inputMessage: "",
     }
   },
@@ -66,6 +76,10 @@ export default {
   },
 
   methods: {
+    back() {
+      localStorage.clear()
+      router.push('/')
+    },
     stringParseToMoment(stringDate) {
       return moment(stringDate, "YYYY-MM-DDTHH:mm:ss.SSSZ")
     },
@@ -81,13 +95,17 @@ export default {
     },
     updateMessages(newMessages) {
       this.messages = this.listMessagesSorted(newMessages.items)
-
-      let container = document.getElementById('messages-container')
-      container.scrollTop = container.scrollHeight
+      this.scroll()
+    },
+    scroll() {
+      this.$nextTick(function() {
+        let div = document.getElementById('messages-div')
+        div.scrollTop = div.scrollHeight
+      })
     },
     listMessagesSorted(data) {
       return data.sort((o1, o2) => {
-        return moment(this.stringParseToMoment(o1.create_date)).isAfter(this.stringParseToMoment(o2.create_date)) ? 1 : -1
+        return moment(this.stringParseToMoment(o1.createDate)).isAfter(this.stringParseToMoment(o2.createDate)) ? 1 : -1
       })
     }
   },
@@ -101,7 +119,8 @@ export default {
       subscribeToMore: {
         document: onCreateMessage,
         updateQuery: function(previousResult, { subscriptionData }) {
-          this.$data.messages.push(subscriptionData.data.onCreateMessage)
+          this.$data.pullMessages.push(subscriptionData.data.onCreateMessage)
+          this.scroll()
         }
       }
     }

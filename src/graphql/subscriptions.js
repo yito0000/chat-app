@@ -33,31 +33,34 @@ export const onCreateMessage = gql`subscription OnCreateMessage {
   onCreateMessage {
     id
     text
-    create_date
+    username
+    createDate
   }
 }
 `;
 export const onUpdateMessage = `subscription OnUpdateMessage(
   $id: ID
   $text: String
-  $create_date: AWSDateTime
+  $createDate: AWSDateTime
 ) {
-  onUpdateMessage(id: $id, text: $text, create_date: $create_date) {
+  onUpdateMessage(id: $id, text: $text, createDate: $createDate) {
     id
     text
-    create_date
+    username
+    createDate
   }
 }
 `;
 export const onDeleteMessage = `subscription OnDeleteMessage(
   $id: ID
   $text: String
-  $create_date: AWSDateTime
+  $createDate: AWSDateTime
 ) {
-  onDeleteMessage(id: $id, text: $text, create_date: $create_date) {
+  onDeleteMessage(id: $id, text: $text, createDate: $createDate) {
     id
     text
-    create_date
+    username
+    createDate
   }
 }
 `;
