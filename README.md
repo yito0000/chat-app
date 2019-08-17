@@ -4,7 +4,7 @@
 /etcファイルにてterraformで環境準備
 ```aidl
 cd etc
-terrafrom apply
+terraform apply
 ```
 
 ## aws configファイル用意
