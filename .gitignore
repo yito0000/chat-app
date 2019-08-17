@@ -5,6 +5,8 @@ node_modules
 etc/.terraform
 etc/terraform.tfstate
 
+src/graphql/schema.json
+
 # local env files
 .env.local
 .env.*.local
