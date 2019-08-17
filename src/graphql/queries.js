@@ -5,9 +5,9 @@ import gql from 'graphql-tag'
 export const getMessage = `query GetMessage($id: ID!) {
   getMessage(id: $id) {
     id
-    user_id
+    username
     text
-    create_date
+    createDate
   }
 }
 `;
@@ -19,9 +19,9 @@ export const listMessages = gql`query ListMessages(
   listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      user_id
+      username
       text
-      create_date
+      createDate
     }
     nextToken
   }

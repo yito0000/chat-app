@@ -1,24 +1,14 @@
 # chat-app
 
 ## AppSyncの準備
-以下を参考にMessageTableを作成
-```/appsync_conf/schema.graphql```
-
-以下のようにCreateMessageを編集
-```
-chat-app/appsync_conf/resolvers/CreateMessage.md
+/etcファイルにてterraformで環境準備
+```aidl
+cd etc
+terrafrom apply
 ```
 
-## Cognitoの準備
-amplifyのインストール
-```
-$ npm install -g @aws-amplify/cli
-$ amplify init
-```
-cognitoを追加
-```
-$ amplify add auth
-```
+## aws configファイル用意
+aws consoleからconfigファイルをダウンロードしてsrc配下に置く
 
 ## Project setup
 ```

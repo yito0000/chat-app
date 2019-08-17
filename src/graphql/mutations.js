@@ -6,15 +6,15 @@ export const createMessage = async (data) => {
   const create = `mutation CreateMessage($input: CreateMessageInput!) {
     createMessage(input: $input) {
       id
-      user_id
       text
-      create_date
+      username
+      createDate
     }
   }
   `
   const messageDetails = {
     input: {
-      user_id: data.username,
+      username: data.username,
       text: data.text
     }
   }
@@ -35,7 +35,7 @@ export const updateMessage = `mutation UpdateMessage($input: UpdateMessageInput!
   updateMessage(input: $input) {
     id
     text
-    create_date
+    createDate
   }
 }
 `;
@@ -43,7 +43,7 @@ export const deleteMessage = `mutation DeleteMessage($input: DeleteMessageInput!
   deleteMessage(input: $input) {
     id
     text
-    create_date
+    createDate
   }
 }
 `;
