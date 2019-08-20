@@ -12,7 +12,7 @@
             <div class="row z-depth-2 white" style="margin-bottom: 10px">
               <div class="col s9">
                 <span style="font-size: small">{{ message.username }}</span>&nbsp<span style="font-size: x-small">{{ dateFormat(message.createDate) }}</span>
-                <p>{{ message.text }}</p>
+                <p v-for="text in messageSplit(message.text)" style="margin: 0px">{{ text }}</p>
               </div>
             </div>
           </li>
@@ -20,7 +20,7 @@
             <div class="row z-depth-2 white" style="margin-bottom: 10px">
               <div class="col s9">
                 <span style="font-size: small">{{ message.username }}</span>&nbsp<span style="font-size: x-small">{{ dateFormat(message.createDate) }}</span>
-                <p>{{ message.text }}</p>
+                <p v-for="text in messageSplit(message.text)" style="margin: 0px">{{ text }}</p>
               </div>
             </div>
           </li>
@@ -92,6 +92,7 @@ export default {
       input.username = localStorage.username
       input.text = this.$data.inputMessage
       createMessage(input)
+      this.$data.inputMessage = ""
     },
     updateMessages(newMessages) {
       this.messages = this.listMessagesSorted(newMessages.items)
@@ -107,6 +108,9 @@ export default {
       return data.sort((o1, o2) => {
         return moment(this.stringParseToMoment(o1.createDate)).isAfter(this.stringParseToMoment(o2.createDate)) ? 1 : -1
       })
+    },
+    messageSplit(message) {
+      return message.split(/\r\n|\r|\n/)
     }
   },
 
