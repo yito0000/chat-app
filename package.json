@@ -15,7 +15,7 @@
     "aws-amplify-vue": "^0.2.14",
     "aws-appsync": "^1.8.1",
     "graphql": "^14.4.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "portfinder": "^1.0.21",
     "terser": "^3.17.0",
     "typescript": "^2.0.10",
